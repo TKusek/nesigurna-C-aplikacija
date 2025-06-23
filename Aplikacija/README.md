@@ -30,7 +30,7 @@ Sljedeće ranjivosti su namjerno uključene u aplikaciju radi edukativnih i demo
 3. **Format string** – Ako se korisnik registrira s korisničkim imenom koje sadrži `%x` specifiere, moguće je pristupiti sadržaju memorije putem printf funkcije koja će ispisati vrijednosti sa memorijskih lokacija umjesto imena.
 4. **Dereferenciranje oslobođene memorije** – U slučaju da korisnik pokuša uplatiti 0, memorija se najprije oslobodi, a zatim se dereferencira, što može uzrokovati nepredvidivo ponašanje.
 5. **Memory leak** – Ako korisnik uplati validan iznos, funkcija se izvrši bez oslobađanja memorije, što dovodi do curenja memorije, osobito štetnog pri većem broju procesa i korisnika.
-6. **No input validation** – Ako korisnik pokuša uplatiti iznos koji nije broj, dolazi do neocekivanog ponašanja programa. Program ne inicijalizira broj za uplatu, ali kada ga pokuša pročitati, čita memorije sa heapa na kojima je prije bilo nešto, pa su sada te vrijednposti nasumične, dok se ne pronađe neka vrijednost koja zadovoljava uvjet veličine, pa se tako sa računa oduzme nepredvidiva vrijednost.
+6. **No input validation** – Ako korisnik pokuša uplatiti iznos koji nije broj, dolazi do neočekivanog ponašanja programa. Program ne inicijalizira broj za uplatu, ali kada ga pokuša pročitati, čita memorije sa heapa na kojima je prije bilo nešto, pa su sada te vrijednosti nasumične, dok se ne pronađe neka vrijednost koja zadovoljava uvjet veličine, pa se tako sa računa oduzme nepredvidiva vrijednost.
 
 ## 6. Tehnologije
 
@@ -64,5 +64,5 @@ gcc main.c sqlite3.c -o main.exe
 ### Alternativno: Korištenje build.bat
 
 .\build.bat
-## Pokreće kompilaciju i program main.exe nastao kompilacijom
+### Pokreće kompilaciju i program main.exe nastao kompilacijom
 
