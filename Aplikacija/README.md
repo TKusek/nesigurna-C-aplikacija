@@ -25,11 +25,12 @@ Cilj projekta je ilustrirati i objasniti uobičajene sigurnosne propuste koji se
 
 Sljedeće ranjivosti su namjerno uključene u aplikaciju radi edukativnih i demonstracijskih svrha:
 
-1. **Buffer overflow** – Prilikom unosa korisničkog imena moguće je prepisati memorijski prostor ako se unese predugačak string.
-2. **SQL injection** – Prilikom prijave moguće je koristiti posebne znakove (`'--`) kako bi se zaobišla autentikacija.
-3. **Format string** – Ako se korisnik registrira s korisničkim imenom koje sadrži `%x` specifiere, moguće je pristupiti sadržaju memorije putem printf funkcije.
+1. **Buffer overflow** – Prilikom unosa korisničkog imena moguće je prepisati memorijski prostor ako se unese predugačak string. Tako se može prepisati povratnu adresu funkcije jer string raste prema njoj, pa se program pri povratku iz nje ruši. Moderni sustavi se od toga štite provjerom veličine ulaza i multiprocessingom pri obradi zahtjeva da se ugasi samo jedan proces.
+2. **SQL injection** – Prilikom prijave moguće je koristiti posebne znakove (`'--`) kako bi se zaobišla autentikacija ili izvršile razne SQL naredbe. Prilikom prijave moguće je za username upisati validno ime i dodati znakove "'--" kako se ne bi provjeravalo je li unesena ispravna lozinka.
+3. **Format string** – Ako se korisnik registrira s korisničkim imenom koje sadrži `%x` specifiere, moguće je pristupiti sadržaju memorije putem printf funkcije koja će ispisati vrijednosti sa memorijskih lokacija umjesto imena.
 4. **Dereferenciranje oslobođene memorije** – U slučaju da korisnik pokuša uplatiti 0, memorija se najprije oslobodi, a zatim se dereferencira, što može uzrokovati nepredvidivo ponašanje.
-5. **Memory leak** – Ako korisnik uplati validan iznos, funkcija se izvrši bez oslobađanja memorije, što dovodi do curenja memorije, osobito štetnog pri većem broju korisnika.
+5. **Memory leak** – Ako korisnik uplati validan iznos, funkcija se izvrši bez oslobađanja memorije, što dovodi do curenja memorije, osobito štetnog pri većem broju procesa i korisnika.
+6. **No input validation** – Ako korisnik pokuša uplatiti iznos koji nije broj, dolazi do neocekivanog ponašanja programa. Program ne inicijalizira broj za uplatu, ali kada ga pokuša pročitati, čita memorije sa heapa na kojima je prije bilo nešto, pa su sada te vrijednposti nasumične, dok se ne pronađe neka vrijednost koja zadovoljava uvjet veličine, pa se tako sa računa oduzme nepredvidiva vrijednost.
 
 ## 6. Tehnologije
 
